@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "1085353437948",
+    "project_id": "ofood-cae06",
+    "storage_bucket": "ofood-cae06.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1085353437948:android:52db73e296edd6b41b4579",
+        "android_client_info": {
+          "package_name": "com.exzray.ofood"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1085353437948-1u1tbglctbblbe0glpriqjfor12cfvlr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBZDgvun4c0srPrCpQzNnz9eCzHSPel6IU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1085353437948-1u1tbglctbblbe0glpriqjfor12cfvlr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1085353437948:android:11e335da595fcfc41b4579",
+        "android_client_info": {
+          "package_name": "com.exzray.ofoodvendor"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1085353437948-1u1tbglctbblbe0glpriqjfor12cfvlr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBZDgvun4c0srPrCpQzNnz9eCzHSPel6IU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1085353437948-1u1tbglctbblbe0glpriqjfor12cfvlr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/category_navigation"
+    app:startDestination="@id/nav_category_list">
+
+    <fragment
+        android:id="@+id/nav_category_list"
+        android:name="com.exzray.ofoodvendor.activitycategory.ui.CategoryListFragment"
+        android:label="My Category List"
+        tools:layout="@layout/fragment_message_list" />
+
+    <fragment
+        android:id="@+id/nav_category_create"
+        android:name="com.exzray.ofoodvendor.activitycategory.ui.CategoryCreateFragment"
+        android:label="Create Category"
+        tools:layout="@layout/fragment_category_create" />
+
+    <fragment
+        android:id="@+id/nav_category_update"
+        android:name="com.exzray.ofoodvendor.activitycategory.ui.CategoryUpdateFragment"
+        android:label="Update Category"
+        tools:layout="@layout/fragment_category_update" />
+
+</navigation>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_dashboard">
+
+    <fragment
+        android:id="@+id/nav_dashboard"
+        android:name="com.exzray.ofoodvendor.activitymain.ui.MainDashboardFragment"
+        android:label="Dashboard"
+        tools:layout="@layout/fragment_main_dashboard" />
+
+    <fragment
+        android:id="@+id/nav_order"
+        android:name="com.exzray.ofoodvendor.activitymain.ui.MainOrderFragment"
+        android:label="Today's Order"
+        tools:layout="@layout/fragment_main_order" />
+
+    <fragment
+        android:id="@+id/nav_booking"
+        android:name="com.exzray.ofoodvendor.activitymain.ui.MainBookingFragment"
+        android:label="Today's Booking"
+        tools:layout="@layout/fragment_main_booking" />
+
+    <fragment
+        android:id="@+id/nav_account"
+        android:name="com.exzray.ofoodvendor.activitymain.ui.MainAccountFragment"
+        android:label="My Account"
+        tools:layout="@layout/fragment_main_account" />
+
+</navigation>

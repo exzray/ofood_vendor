@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_message_list"
+        android:icon="@drawable/ic_outline_message_24"
+        android:title="all message" />
+
+    <item
+        android:id="@+id/nav_message_setting"
+        android:icon="@drawable/ic_outline_settings_24"
+        android:title="settings" />
+
+</menu>
