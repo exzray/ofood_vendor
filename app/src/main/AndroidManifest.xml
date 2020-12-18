@@ -20,7 +20,7 @@
             android:resource="@array/preloaded_fonts" />
 
         <activity
-            android:name=".activitymain.MainActivity"
+            android:name=".activitylogin.LoginActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,37 +28,31 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
+        <activity android:name=".activitymain.MainActivity" />
         <activity
             android:name=".activitymessage.MessageActivity"
             android:label="Message"
             android:parentActivityName=".activitymain.MainActivity" />
-
         <activity
             android:name=".activityorder.OrderActivity"
             android:label="Order"
             android:parentActivityName=".activitymain.MainActivity" />
-
         <activity
             android:name=".activitybooking.BookingActivity"
             android:label="Booking"
             android:parentActivityName=".activitymain.MainActivity" />
-
         <activity
             android:name=".activityproduct.ProductActivity"
             android:label="Product"
             android:parentActivityName=".activitymain.MainActivity" />
-
         <activity
             android:name=".activitycategory.CategoryActivity"
             android:label="Category"
             android:parentActivityName=".activitymain.MainActivity" />
-
         <activity
             android:name=".activitytable.TableActivity"
             android:label="Table"
             android:parentActivityName=".activitymain.MainActivity" />
-
     </application>
 
 </manifest>

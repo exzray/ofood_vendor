@@ -1,5 +1,7 @@
 package com.exzray.ofoodvendor.utility;
 
+import android.content.Context;
+
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.navigation.NavController;
@@ -8,6 +10,9 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 
 import com.exzray.ofoodvendor.R;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 
 import java.util.Locale;
 
@@ -26,6 +31,15 @@ public class Helper {
 
     public static Boolean isStringEmpty(String s){
         return s == null || s.isEmpty();
+    }
+
+    public static GoogleSignInClient getGoogleSignInClient(Context context){
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(context.getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build();
+
+        return GoogleSignIn.getClient(context, gso);
     }
 
 }

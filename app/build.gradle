@@ -57,6 +57,7 @@ dependencies {
     // firebase library
     implementation 'com.google.firebase:firebase-auth:20.0.1'
     implementation 'com.google.firebase:firebase-firestore:22.0.1'
+    implementation 'com.google.android.gms:play-services-auth:19.0.0'
 
     // download library
     implementation 'com.github.Drjacky:ImagePicker:1.7.10'
