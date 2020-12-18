@@ -24,4 +24,8 @@ public class Helper {
         return NavHostFragment.findNavController(fragment);
     }
 
+    public static Boolean isStringEmpty(String s){
+        return s == null || s.isEmpty();
+    }
+
 }

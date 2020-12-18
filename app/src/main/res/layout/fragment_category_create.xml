@@ -26,6 +26,7 @@
                     android:layout_marginBottom="16dp"
                     android:hint="Name"
                     app:boxBackgroundColor="@color/white"
+                    app:endIconMode="clear_text"
                     app:helperText="write category name here">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -42,6 +43,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
                     android:hint="Description"
+                    app:endIconMode="clear_text"
                     app:boxBackgroundColor="@color/white"
                     app:helperText="write category description here">
 
