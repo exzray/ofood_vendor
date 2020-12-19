@@ -29,7 +29,7 @@
             android:layout_height="match_parent"
             android:layout_marginTop="?attr/actionBarSize"
             app:defaultNavHost="true"
-            app:navGraph="@navigation/category_navigation" />
+            app:navGraph="@navigation/route_category" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

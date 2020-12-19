@@ -37,7 +37,7 @@
             android:layout_height="match_parent"
             android:layout_marginVertical="?attr/actionBarSize"
             app:defaultNavHost="true"
-            app:navGraph="@navigation/message_navigation" />
+            app:navGraph="@navigation/route_message" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
