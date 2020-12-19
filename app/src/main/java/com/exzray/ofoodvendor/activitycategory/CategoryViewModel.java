@@ -39,9 +39,7 @@ public class CategoryViewModel extends ViewModel {
                         if (value == null) return;
 
                         list_snapshot_category.setValue(value.getDocuments());
-
                     });
-
 
         return list_snapshot_category;
     }

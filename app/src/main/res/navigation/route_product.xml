@@ -1,6 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/route_product">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/route_product"
+    app:startDestination="@id/nav_product_list">
+
+    <fragment
+        android:id="@+id/nav_product_list"
+        android:name="com.exzray.ofoodvendor.activityproduct.ui.ProductListFragment"
+        android:label="Product List"
+        tools:layout="@layout/fragment_product_list">
+        <action
+            android:id="@+id/product_list_to_update"
+            app:destination="@id/nav_product_update" />
+        <action
+            android:id="@+id/product_list_to_create"
+            app:destination="@id/nav_product_create" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_product_create"
+        android:name="com.exzray.ofoodvendor.activityproduct.ui.ProductCreateFragment"
+        android:label="Product Create"
+        tools:layout="@layout/fragment_product_create" />
+
+    <fragment
+        android:id="@+id/nav_product_update"
+        android:name="com.exzray.ofoodvendor.activityproduct.ui.ProductUpdateFragment"
+        android:label="Product Update"
+        tools:layout="@layout/fragment_product_update" >
+        <argument
+            android:name="product_uid"
+            app:argType="string" />
+    </fragment>
 
 </navigation>

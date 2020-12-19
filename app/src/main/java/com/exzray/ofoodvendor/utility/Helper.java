@@ -8,11 +8,15 @@ import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.exzray.ofoodvendor.R;
+import com.exzray.ofoodvendor.model.ModelCategory;
+import com.exzray.ofoodvendor.model.ModelSelection;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.firebase.firestore.DocumentSnapshot;
 
-import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Helper {
 
@@ -46,6 +50,26 @@ public class Helper {
 
     public static Boolean getBoolean(Boolean b) {
         return b == null || b;
+    }
+
+    public static Double parseStringToDouble(String s) {
+        return Double.parseDouble(s);
+    }
+
+    public static List<ModelSelection> getModelSelectionList(List<DocumentSnapshot> snapshots) {
+        final List<ModelSelection> list = new ArrayList<>();
+
+        for (DocumentSnapshot snapshot : snapshots) {
+            final ModelCategory category = Convert.snapshotToCategory(snapshot);
+
+            final ModelSelection selection = new ModelSelection();
+            selection.setName(category.getName());
+            selection.setTag(snapshot.getId());
+
+            list.add(selection);
+        }
+
+        return list;
     }
 
 }

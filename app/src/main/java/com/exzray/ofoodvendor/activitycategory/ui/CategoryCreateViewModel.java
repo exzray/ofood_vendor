@@ -28,19 +28,19 @@ public class CategoryCreateViewModel extends ViewModel {
         checkCreateReady();
     }
 
-    public void setStringName(String name) {
-        string_name.setValue(name);
+    public void setStringName(String s) {
+        string_name.setValue(s);
 
-        if (Helper.isStringEmpty(name))
+        if (Helper.isStringEmpty(s))
             string_error_name.setValue("category name must not empty");
         else
             string_error_name.setValue("");
     }
 
-    public void setStringDescription(String description) {
-        string_description.setValue(description);
+    public void setStringDescription(String s) {
+        string_description.setValue(s);
 
-        if (Helper.isStringEmpty(description))
+        if (Helper.isStringEmpty(s))
             string_error_description.setValue("category description must not empty");
         else
             string_error_description.setValue("");

@@ -32,12 +32,20 @@ public class Firebase {
         return getDocumentOwnVendor().collection("list_category");
     }
 
+    public static CollectionReference getCollectionListProduct() {
+        return getDocumentOwnVendor().collection("list_product");
+    }
+
     public static DocumentReference getDocumentProfile(String uid) {
         return getCollectionListProfile().document(uid);
     }
 
     public static DocumentReference getDocumentVendor(String uid) {
         return getCollectionListVendor().document(uid);
+    }
+
+    public static DocumentReference getDocumentCategory(String uid) {
+        return getCollectionListCategory().document(uid);
     }
 
     public static DocumentReference getDocumentOwnProfile() {
