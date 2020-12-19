@@ -12,14 +12,14 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.bumptech.glide.Glide;
-import com.exzray.ofoodvendor.R;
 import com.exzray.ofoodvendor.activitymain.MainViewModel;
 import com.exzray.ofoodvendor.adapter.AdapterNavigation;
 import com.exzray.ofoodvendor.databinding.FragmentMainAccountBinding;
 import com.exzray.ofoodvendor.model.ModelNavigation;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.exzray.ofoodvendor.model.ModelProfile;
+import com.exzray.ofoodvendor.utility.Convert;
+import com.exzray.ofoodvendor.utility.Firebase;
+import com.exzray.ofoodvendor.utility.Helper;
 
 public class MainAccountFragment extends Fragment {
 
@@ -42,6 +42,18 @@ public class MainAccountFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        view_model_activity
+                .getSnapshotProfile()
+                .observe(getViewLifecycleOwner(), snapshot -> {
+
+                    final ModelProfile profile = Convert.snapshotToProfile(snapshot);
+
+                    binding.includeInfoProfile.textUserName.setText(profile.getName());
+                    binding.includeInfoProfile.textUserEmail.setText(Firebase.getFirebaseUser().getEmail());
+                    binding.includeInfoProfile.textUserJoined.setText(Helper.getStringJoined(profile.getJoined()));
+
+                });
 
         Glide
                 .with(this)

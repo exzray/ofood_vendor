@@ -15,7 +15,9 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.firebase.firestore.DocumentSnapshot;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class Helper {
@@ -42,6 +44,10 @@ public class Helper {
                 .build();
 
         return GoogleSignIn.getClient(context, gso);
+    }
+
+    public static String getStringJoined(Date date) {
+        return "member since " + DateFormat.getDateInstance(DateFormat.MEDIUM).format(date);
     }
 
     public static String getString(String s) {

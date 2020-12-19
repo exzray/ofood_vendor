@@ -185,6 +185,7 @@ public class ProductUpdateFragment extends Fragment {
                                 .with(this)
                                 .crop(1, 1)
                                 .maxResultSize(800, 800)
+                                .saveDir(requireContext().getCacheDir())
                                 .start());
 
     }
