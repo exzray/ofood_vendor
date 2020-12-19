@@ -1,18 +1,23 @@
 package com.exzray.ofoodvendor.activitylogin;
 
+import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.exzray.ofoodvendor.R;
+import com.exzray.ofoodvendor.activitymain.MainActivity;
 import com.exzray.ofoodvendor.databinding.ActivityLoginBinding;
+import com.exzray.ofoodvendor.utility.Helper;
 import com.google.firebase.auth.FirebaseUser;
 
 public class LoginActivity extends AppCompatActivity {
 
     private ActivityLoginBinding binding;
     private LoginViewModel view_model;
+    private ProgressDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,25 +25,45 @@ public class LoginActivity extends AppCompatActivity {
 
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         view_model = new ViewModelProvider(this).get(LoginViewModel.class);
+        dialog = new ProgressDialog(this);
 
         view_model
                 .getUser()
                 .observe(this, this::updateUI);
 
         setContentView(binding.getRoot());
-    }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
+        view_model
+                .getBooleanDetailsExist()
+                .observe(this, exist -> {
 
-        view_model.authenticate();
+                    if (exist) {
+                        Intent intent = new Intent(this, MainActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+
+                        startActivity(intent);
+
+                    } else {
+
+                        Helper
+                                .getNavController(getSupportFragmentManager())
+                                .navigate(R.id.nav_login_signup);
+
+                    }
+
+                    dialog.dismiss();
+
+                });
     }
 
     private void updateUI(FirebaseUser user) {
 
-        if (user != null)
-            Toast.makeText(this, "do something", Toast.LENGTH_SHORT).show();
+        if (user != null) {
+            dialog.setMessage("please wait");
+            dialog.show();
+
+            view_model.verification();
+        }
 
     }
 }

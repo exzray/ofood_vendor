@@ -23,8 +23,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.GoogleAuthProvider;
 
-import org.jetbrains.annotations.NotNull;
-
 public class LoginSigninFragment extends Fragment {
 
     private static final int REQUEST_CODE_GOOGLE = 1001;
@@ -45,14 +43,25 @@ public class LoginSigninFragment extends Fragment {
     }
 
     @Override
-    public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         binding.setFragment(this);
+
+        view_model_fragment
+                .getBooleanLoginEnable()
+                .observe(getViewLifecycleOwner(), enable -> binding.button.setEnabled(enable));
     }
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable @org.jetbrains.annotations.Nullable Intent data) {
+    public void onStart() {
+        super.onStart();
+
+        view_model_activity.authenticate();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == REQUEST_CODE_GOOGLE) {
@@ -63,13 +72,13 @@ public class LoginSigninFragment extends Fragment {
                 signInFirebase(account.getIdToken());
 
             } catch (ApiException e) {
-                Toast.makeText(requireContext(), "error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(requireContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         }
     }
 
     private void signInFirebase(String token) {
-        binding.button.setEnabled(false);
+        view_model_fragment.setBooleanLoginEnable(false);
 
         AuthCredential credential = GoogleAuthProvider.getCredential(token, null);
         Firebase
@@ -77,7 +86,7 @@ public class LoginSigninFragment extends Fragment {
                 .signInWithCredential(credential)
                 .addOnSuccessListener(result -> view_model_activity.authenticate())
                 .addOnFailureListener(e -> {
-                    binding.button.setEnabled(true);
+                    view_model_fragment.setBooleanLoginEnable(true);
                     Toast.makeText(requireContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
                 });
     }
