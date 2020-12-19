@@ -21,6 +21,13 @@ public class CategoryViewModel extends ViewModel {
     private ListenerRegistration registration_list_category;
 
 
+    @Override
+    protected void onCleared() {
+        super.onCleared();
+
+        if (registration_list_category != null) registration_list_category.remove();
+    }
+
     public LiveData<List<DocumentSnapshot>> getListSnapshotCategory() {
         if (registration_list_category == null)
             registration_list_category = Firebase

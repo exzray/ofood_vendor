@@ -9,7 +9,7 @@
         android:id="@+id/nav_category_list"
         android:name="com.exzray.ofoodvendor.activitycategory.ui.CategoryListFragment"
         android:label="My Category List"
-        tools:layout="@layout/fragment_message_list" >
+        tools:layout="@layout/fragment_category_list">
         <action
             android:id="@+id/category_list_to_create"
             app:destination="@id/nav_category_create" />
@@ -28,7 +28,7 @@
         android:id="@+id/nav_category_update"
         android:name="com.exzray.ofoodvendor.activitycategory.ui.CategoryUpdateFragment"
         android:label="Update Category"
-        tools:layout="@layout/fragment_category_update" >
+        tools:layout="@layout/fragment_category_update">
         <argument
             android:name="category_uid"
             app:argType="string" />
