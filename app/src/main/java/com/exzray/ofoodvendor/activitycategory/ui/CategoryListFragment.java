@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavDirections;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.exzray.ofoodvendor.R;
@@ -74,12 +75,17 @@ public class CategoryListFragment extends Fragment {
         binding.recycler.setAdapter(adapter);
         binding.recycler.setLayoutManager(manager);
 
+        view_model_activity
+                .getListSnapshotCategory()
+                .observe(getViewLifecycleOwner(), adapter::update);
     }
 
     private void callbackUpdate(DocumentSnapshot snapshot) {
+        NavDirections directions = CategoryListFragmentDirections.categoryListToUpdate(snapshot.getId());
+
         Helper
                 .getNavController(this)
-                .navigate(R.id.nav_category_update);
+                .navigate(directions);
     }
 
     private void callbackDelete(DocumentSnapshot snapshot) {

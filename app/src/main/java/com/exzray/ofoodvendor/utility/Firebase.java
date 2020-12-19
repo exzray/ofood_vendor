@@ -28,6 +28,10 @@ public class Firebase {
         return getFirebaseFirestore().collection("list_vendor");
     }
 
+    public static CollectionReference getCollectionListCategory() {
+        return getDocumentOwnVendor().collection("list_category");
+    }
+
     public static DocumentReference getDocumentProfile(String uid) {
         return getCollectionListProfile().document(uid);
     }

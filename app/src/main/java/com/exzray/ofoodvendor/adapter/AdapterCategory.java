@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.exzray.ofoodvendor.callback.CallbackSnapshot;
 import com.exzray.ofoodvendor.databinding.ItemCategoryBinding;
 import com.exzray.ofoodvendor.model.ModelCategory;
+import com.exzray.ofoodvendor.utility.Convert;
 import com.google.firebase.firestore.DocumentSnapshot;
 
 import org.jetbrains.annotations.NotNull;
@@ -17,8 +18,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AdapterCategory extends RecyclerView.Adapter<AdapterCategory.VH> {
-
-    private static int counter = 0;
 
     private final CallbackSnapshot callback_update;
     private final CallbackSnapshot callback_delete;
@@ -42,14 +41,14 @@ public class AdapterCategory extends RecyclerView.Adapter<AdapterCategory.VH> {
 
     @Override
     public void onBindViewHolder(@NonNull @NotNull VH holder, int position) {
-//        final DocumentSnapshot snapshot = list.get(position);
-        holder.setData(null);
+        final DocumentSnapshot snapshot = list.get(position);
+        holder.setData(snapshot);
 
     }
 
     @Override
     public int getItemCount() {
-        return 8;
+        return list.size();
     }
 
     public void update(List<DocumentSnapshot> snapshots) {
@@ -61,7 +60,7 @@ public class AdapterCategory extends RecyclerView.Adapter<AdapterCategory.VH> {
 
     class VH extends RecyclerView.ViewHolder {
 
-        private ItemCategoryBinding binding;
+        private final ItemCategoryBinding binding;
 
 
         public VH(ItemCategoryBinding binding) {
@@ -71,13 +70,7 @@ public class AdapterCategory extends RecyclerView.Adapter<AdapterCategory.VH> {
         }
 
         public void setData(DocumentSnapshot snapshot) {
-
-            ModelCategory category = new ModelCategory();
-            category.setName("Category");
-            category.setDescription("Lorem ipsum");
-            category.setPosition(counter);
-
-            counter += 1;
+            final ModelCategory category = Convert.snapshotToCategory(snapshot);
 
             binding.setCallbackUpdate(callback_update);
             binding.setCallbackDelete(callback_delete);

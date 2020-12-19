@@ -8,6 +8,7 @@ public class ModelCategory {
     private String description = "";
 
     private Date created = new Date();
+    private Date updated = new Date();
 
     private Integer position = 0;
 
@@ -36,6 +37,14 @@ public class ModelCategory {
 
     public void setCreated(Date created) {
         this.created = created;
+    }
+
+    public Date getUpdated() {
+        return updated;
+    }
+
+    public void setUpdated(Date updated) {
+        this.updated = updated;
     }
 
     public Integer getPosition() {

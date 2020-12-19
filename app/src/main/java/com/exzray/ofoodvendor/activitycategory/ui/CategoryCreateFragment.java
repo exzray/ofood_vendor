@@ -1,5 +1,6 @@
 package com.exzray.ofoodvendor.activitycategory.ui;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -9,7 +10,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,14 +19,19 @@ import androidx.lifecycle.ViewModelProvider;
 import com.exzray.ofoodvendor.R;
 import com.exzray.ofoodvendor.activitycategory.CategoryViewModel;
 import com.exzray.ofoodvendor.databinding.FragmentCategoryCreateBinding;
+import com.exzray.ofoodvendor.utility.Helper;
+import com.google.firebase.firestore.DocumentSnapshot;
 
 import org.jetbrains.annotations.NotNull;
+
+import java.util.List;
 
 public class CategoryCreateFragment extends Fragment {
 
     private FragmentCategoryCreateBinding binding;
     private CategoryViewModel view_model_activity;
     private CategoryCreateViewModel view_model_fragment;
+    private ProgressDialog dialog;
 
 
     @Override
@@ -36,6 +41,7 @@ public class CategoryCreateFragment extends Fragment {
         binding = FragmentCategoryCreateBinding.inflate(inflater, container, false);
         view_model_activity = new ViewModelProvider(requireActivity()).get(CategoryViewModel.class);
         view_model_fragment = new ViewModelProvider(this).get(CategoryCreateViewModel.class);
+        dialog = new ProgressDialog(requireContext());
 
         setHasOptionsMenu(true);
 
@@ -63,8 +69,15 @@ public class CategoryCreateFragment extends Fragment {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull @NotNull MenuItem item) {
-        if (item.getItemId() == R.id.action_submit)
-            Toast.makeText(requireContext(), "submit", Toast.LENGTH_SHORT).show();
+        if (item.getItemId() == R.id.action_submit) {
+            dialog.setMessage("adding new category");
+            dialog.show();
+
+            List<DocumentSnapshot> list = view_model_activity.getListSnapshotCategory().getValue();
+            int position = list == null ? 0 : list.size();
+
+            view_model_fragment.createCategory(position);
+        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -80,6 +93,17 @@ public class CategoryCreateFragment extends Fragment {
         view_model_fragment
                 .getStringErrorDescription()
                 .observe(getViewLifecycleOwner(), s -> binding.layoutDescription.setError(s));
+
+        view_model_fragment
+                .getBooleanCreateSuccess()
+                .observe(getViewLifecycleOwner(), success -> {
+
+                    if (success)
+                        Helper.getNavController(this).popBackStack();
+
+                    dialog.dismiss();
+
+                });
     }
 
 

@@ -5,12 +5,14 @@ import androidx.lifecycle.MediatorLiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.exzray.ofoodvendor.model.ModelCategory;
+import com.exzray.ofoodvendor.utility.Firebase;
 import com.exzray.ofoodvendor.utility.Helper;
 
 public class CategoryCreateViewModel extends ViewModel {
 
     private final MediatorLiveData<Boolean> boolean_create_ready = new MediatorLiveData<>();
-    private final MediatorLiveData<Boolean> boolean_create_running = new MediatorLiveData<>();
+    private final MediatorLiveData<Boolean> boolean_create_success = new MediatorLiveData<>();
 
     private final MutableLiveData<String> string_name = new MutableLiveData<>();
     private final MutableLiveData<String> string_description = new MutableLiveData<>();
@@ -48,16 +50,8 @@ public class CategoryCreateViewModel extends ViewModel {
         return boolean_create_ready;
     }
 
-    public LiveData<Boolean> getBooleanCreateRunning() {
-        return boolean_create_running;
-    }
-
-    public LiveData<String> getStringName() {
-        return string_name;
-    }
-
-    public LiveData<String> getStringDescription() {
-        return string_description;
+    public LiveData<Boolean> getBooleanCreateSuccess() {
+        return boolean_create_success;
     }
 
     public LiveData<String> getStringErrorName() {
@@ -66,6 +60,24 @@ public class CategoryCreateViewModel extends ViewModel {
 
     public LiveData<String> getStringErrorDescription() {
         return string_error_description;
+    }
+
+    public void createCategory(int position) {
+        assert boolean_create_ready.getValue() != null;
+
+        if (boolean_create_ready.getValue()) {
+
+            final ModelCategory category = new ModelCategory();
+            category.setName(string_name.getValue());
+            category.setDescription(string_description.getValue());
+            category.setPosition(position);
+
+            Firebase
+                    .getCollectionListCategory()
+                    .add(category)
+                    .addOnCompleteListener(task -> boolean_create_success.setValue(task.isSuccessful()));
+
+        }
     }
 
     private void checkCreateReady() {
