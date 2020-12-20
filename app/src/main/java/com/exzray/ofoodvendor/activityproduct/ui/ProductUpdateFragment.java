@@ -159,16 +159,14 @@ public class ProductUpdateFragment extends Fragment {
                     binding.editDescription.setText(product.getDescription());
                     binding.swEnable.setChecked(product.getEnable());
 
-                    if (!product.getImage_photo().isEmpty())
-                        Firebase
-                                .getFirebaseStorage()
-                                .getReference()
-                                .child(product.getImage_photo())
-                                .getDownloadUrl()
-                                .addOnSuccessListener(uri -> Glide
-                                        .with(this)
-                                        .load(uri)
-                                        .into(binding.imagePhoto));
+                    Firebase
+                            .getStorageVendor()
+                            .child("product/" + snapshot.getId())
+                            .getDownloadUrl()
+                            .addOnSuccessListener(uri -> Glide
+                                    .with(binding.getRoot())
+                                    .load(uri)
+                                    .into(binding.imagePhoto));
 
                     Firebase
                             .getDocumentCategory(product.getCategory_uid())

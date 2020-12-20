@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <import type="com.exzray.ofoodvendor.utility.Helper" />
+
+        <variable
+            name="callbackUpdate"
+            type="com.exzray.ofoodvendor.callback.CallbackSnapshot" />
+
+        <variable
+            name="callbackDelete"
+            type="com.exzray.ofoodvendor.callback.CallbackSnapshot" />
+
+        <variable
+            name="snapshot"
+            type="com.google.firebase.firestore.DocumentSnapshot" />
+
+        <variable
+            name="table"
+            type="com.exzray.ofoodvendor.model.ModelTable" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?android:attr/selectableItemBackground"
+        android:onClick="@{() -> callbackUpdate.onClick(snapshot)}"
+        android:padding="10dp">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="18dp"
+            android:layout_marginEnd="10dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/image_delete"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/text_name"
+                style="@style/TextAppearance.App.Subtitle1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:lines="1"
+                android:text="@{Helper.getStringTableIndex(table.index)}"
+                tools:text="Table No. 1" />
+
+            <TextView
+                android:id="@+id/text_description"
+                style="@style/TextAppearance.App.Caption"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:text="@{Helper.getStringTableSize(table.size)}"
+                tools:text="some description" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/image_delete"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:contentDescription="@string/app_name"
+            android:onClick="@{()-> callbackDelete.onClick(snapshot)}"
+            android:src="@drawable/ic_baseline_delete_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

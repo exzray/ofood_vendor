@@ -3,6 +3,7 @@ package com.exzray.ofoodvendor.utility;
 import com.exzray.ofoodvendor.model.ModelCategory;
 import com.exzray.ofoodvendor.model.ModelProduct;
 import com.exzray.ofoodvendor.model.ModelProfile;
+import com.exzray.ofoodvendor.model.ModelTable;
 import com.exzray.ofoodvendor.model.ModelVendor;
 import com.google.firebase.firestore.DocumentSnapshot;
 
@@ -22,6 +23,10 @@ public class Convert {
 
     public static ModelProduct snapshotToProduct(DocumentSnapshot snapshot) {
         return snapshot.toObject(ModelProduct.class);
+    }
+
+    public static ModelTable snapshotToTable(DocumentSnapshot snapshot) {
+        return snapshot.toObject(ModelTable.class);
     }
 
 }

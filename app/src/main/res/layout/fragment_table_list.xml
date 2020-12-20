@@ -5,15 +5,15 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".activityproduct.ui.ProductListFragment">
+        tools:context=".activitytable.ui.TableListFragment">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:overScrollMode="never"
-            tools:itemCount="6"
-            tools:listitem="@layout/item_product" />
+            tools:itemCount="3"
+            tools:listitem="@layout/item_table" />
 
     </FrameLayout>
 

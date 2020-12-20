@@ -36,21 +36,18 @@ public class MainViewModel extends ViewModel {
 
 
     public MainViewModel() {
-        map_table_info.addSource(list_table_total, snapshots -> checkTableInfo(snapshots.size(), null));
-        map_table_info.addSource(list_table_occupy, snapshots -> checkTableInfo(null, snapshots.size()));
+        map_table_info.addSource(list_table_total, snapshots -> checkTableInfo());
+        map_table_info.addSource(list_table_occupy, snapshots -> checkTableInfo());
 
-        checkTableInfo(0, 0);
+        checkTableInfo();
     }
 
-    private void checkTableInfo(Integer total, Integer occupy) {
-        int _total = 0;
-        int _occupy = 0;
+    private void checkTableInfo() {
+        assert list_table_total.getValue() != null;
+        assert list_table_occupy.getValue() != null;
 
-        if (total != null)
-            _total = total;
-
-        if (occupy != null)
-            _occupy = occupy;
+        int _total = list_table_total.getValue().size();
+        int _occupy = list_table_occupy.getValue().size();
 
         String str_label = String.format(Locale.getDefault(), "%d / %d", _occupy, _total);
         String str_status;

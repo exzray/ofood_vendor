@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/route_product"
+    app:startDestination="@id/nav_table_list">
+
+    <fragment
+        android:id="@+id/nav_table_list"
+        android:name="com.exzray.ofoodvendor.activitytable.ui.TableListFragment"
+        android:label="Table List"
+        tools:layout="@layout/fragment_table_list">
+        <action
+            android:id="@+id/table_list_to_update"
+            app:destination="@id/nav_table_update" />
+        <action
+            android:id="@+id/table_list_to_create"
+            app:destination="@id/nav_table_create" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_table_create"
+        android:name="com.exzray.ofoodvendor.activitytable.ui.TableCreateFragment"
+        android:label="Table Create"
+        tools:layout="@layout/fragment_table_create" />
+
+    <fragment
+        android:id="@+id/nav_table_update"
+        android:name="com.exzray.ofoodvendor.activitytable.ui.TableUpdateFragment"
+        android:label="Table Update"
+        tools:layout="@layout/fragment_table_update">
+        <argument
+            android:name="table_uid"
+            app:argType="string" />
+    </fragment>
+
+</navigation>

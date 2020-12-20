@@ -45,14 +45,4 @@ public class CategoryActivity extends AppCompatActivity {
 
         NavigationUI.setupActionBarWithNavController(this, controller, configuration);
     }
-
-    private final NavController.OnDestinationChangedListener destination_change = new NavController.OnDestinationChangedListener() {
-
-        @Override
-        public void onDestinationChanged(@NonNull NavController controller, @NotNull NavDestination destination, @Nullable Bundle arguments) {
-
-
-
-        }
-    };
 }

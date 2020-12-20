@@ -19,6 +19,7 @@ import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class Helper {
 
@@ -48,6 +49,14 @@ public class Helper {
 
     public static String getStringJoined(Date date) {
         return "member since " + DateFormat.getDateInstance(DateFormat.MEDIUM).format(date);
+    }
+
+    public static String getStringTableIndex(int index) {
+        return String.format(Locale.getDefault(), "Table No. %d", index);
+    }
+
+    public static String getStringTableSize(int size) {
+        return String.format(Locale.getDefault(), "table size %d", size);
     }
 
     public static String getString(String s) {
