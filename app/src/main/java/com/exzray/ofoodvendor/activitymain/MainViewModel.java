@@ -50,7 +50,7 @@ public class MainViewModel extends ViewModel {
     public LiveData<DocumentSnapshot> getSnapshotVendor() {
         if (registration_vendor == null)
             registration_vendor = Firebase
-                    .getDocumentOwnProfile()
+                    .getDocumentOwnVendor()
                     .addSnapshotListener((value, error) -> {
                         if (error != null) Log.i(TAG, error.getMessage());
 
