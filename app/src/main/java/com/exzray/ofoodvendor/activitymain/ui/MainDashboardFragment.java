@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.exzray.ofoodvendor.R;
 import com.exzray.ofoodvendor.activitybooking.BookingActivity;
 import com.exzray.ofoodvendor.activitycategory.CategoryActivity;
 import com.exzray.ofoodvendor.activitymain.MainViewModel;
@@ -47,6 +48,26 @@ public class MainDashboardFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         setupRecycler();
+        setupInfoTable();
+    }
+
+    private void setupInfoTable() {
+        view_model_activity
+                .getMapTableInfo()
+                .observe(getViewLifecycleOwner(), info -> {
+                    String label = info.get("label");
+                    String status = info.get("status");
+
+                    binding.includeInfoTable.textLabel.setText(label);
+                    binding.includeInfoTable.textStatus.setText(status);
+
+                    assert status != null;
+
+                    if (status.equals("available"))
+                        binding.includeInfoTable.textStatus.setBackgroundResource(R.drawable.tag_available);
+                    else
+                        binding.includeInfoTable.textStatus.setBackgroundResource(R.drawable.tag_unvailable);
+                });
     }
 
     private void setupRecycler() {

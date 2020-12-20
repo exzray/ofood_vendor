@@ -40,6 +40,10 @@ public class Firebase {
         return getDocumentOwnVendor().collection("list_product");
     }
 
+    public static CollectionReference getCollectionListTable() {
+        return getDocumentOwnVendor().collection("list_table");
+    }
+
     public static DocumentReference getDocumentProfile(String uid) {
         return getCollectionListProfile().document(uid);
     }
@@ -54,6 +58,10 @@ public class Firebase {
 
     public static DocumentReference getDocumentProduct(String uid) {
         return getCollectionListProduct().document(uid);
+    }
+
+    public static DocumentReference getDocumentTable(String uid) {
+        return getCollectionListTable().document(uid);
     }
 
     public static DocumentReference getDocumentOwnProfile() {

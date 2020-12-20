@@ -32,8 +32,11 @@ import com.exzray.ofoodvendor.utility.Convert;
 import com.exzray.ofoodvendor.utility.Firebase;
 import com.exzray.ofoodvendor.utility.Helper;
 import com.github.drjacky.imagepicker.ImagePicker;
+import com.google.firebase.firestore.DocumentReference;
 
 import org.jetbrains.annotations.NotNull;
+
+import java.util.Date;
 
 public class ProductUpdateFragment extends Fragment {
 
@@ -101,8 +104,17 @@ public class ProductUpdateFragment extends Fragment {
                             String path = snapshot.getMetadata().getPath();
 
                             Firebase
-                                    .getDocumentProduct(uid)
-                                    .update("image_photo", path);
+                                    .getFirebaseFirestore()
+                                    .runTransaction(transaction -> {
+
+                                        final DocumentReference ref = Firebase.getDocumentProduct(uid);
+                                        final ModelProduct product = Convert.snapshotToProduct(transaction.get(ref));
+
+                                        product.setImage_photo(path);
+                                        product.setUpdated(new Date());
+
+                                        return null;
+                                    });
 
                             Glide.with(this).load(uri).into(binding.imagePhoto);
                         });

@@ -35,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         view_model = new ViewModelProvider(this).get(MainViewModel.class);
 
+        view_model.init();
+
         setContentView(binding.getRoot());
         setSupportActionBar(binding.appBarMain.toolbar);
 
@@ -82,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
                 });
 
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_dashboard, R.id.nav_order, R.id.nav_booking, R.id.nav_account)
+                R.id.nav_dashboard, R.id.nav_order, R.id.nav_booking, R.id.nav_account, R.id.nav_logout)
                 .setDrawerLayout(drawer)
                 .build();
 
