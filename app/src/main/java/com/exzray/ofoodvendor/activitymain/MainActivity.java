@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
             else
                 binding.appBarMain.fab.extend();
 
-            if (destination.getId() == R.id.nav_account)
+            if (destination.getId() == R.id.nav_account || destination.getId() == R.id.nav_logout)
                 binding.appBarMain.fab.hide();
             else
                 binding.appBarMain.fab.show();
