@@ -77,7 +77,11 @@ public class Firebase {
         return FirebaseStorage.getInstance();
     }
 
+    public static StorageReference getStorageProfile() {
+        return getFirebaseStorage().getReference("profile/" + getFirebaseUser().getUid());
+    }
+
     public static StorageReference getStorageVendor() {
-        return getFirebaseStorage().getReference(getFirebaseUser().getUid());
+        return getFirebaseStorage().getReference("vendor/" + getFirebaseUser().getUid());
     }
 }

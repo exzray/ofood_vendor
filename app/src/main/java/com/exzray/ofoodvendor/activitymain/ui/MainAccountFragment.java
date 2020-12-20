@@ -1,5 +1,6 @@
 package com.exzray.ofoodvendor.activitymain.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.bumptech.glide.Glide;
 import com.exzray.ofoodvendor.activitymain.MainViewModel;
+import com.exzray.ofoodvendor.activityprofile.ProfileActivity;
+import com.exzray.ofoodvendor.activityvendor.VendorActivity;
 import com.exzray.ofoodvendor.adapter.AdapterNavigation;
 import com.exzray.ofoodvendor.databinding.FragmentMainAccountBinding;
 import com.exzray.ofoodvendor.model.ModelNavigation;
@@ -53,13 +56,21 @@ public class MainAccountFragment extends Fragment {
                     binding.includeInfoProfile.textUserEmail.setText(Firebase.getFirebaseUser().getEmail());
                     binding.includeInfoProfile.textUserJoined.setText(Helper.getStringJoined(profile.getJoined()));
 
+                    Firebase
+                            .getStorageProfile()
+                            .child("image_photo")
+                            .getDownloadUrl()
+                            .addOnSuccessListener(uri -> Glide.with(this).load(uri).into(binding.includeInfoProfile.imagePhoto));
+
                 });
 
-        Glide
-                .with(this)
-                .load("https://firebasestorage.googleapis.com/v0/b/ofood-cae06.appspot.com/o/test%2Fuser_photo.jpg?alt=media&token=2e4917cd-06df-4946-b548-7ebb585b404b")
-                .centerCrop()
-                .into(binding.includeInfoProfile.imagePhoto);
+        binding
+                .includeInfoProfile
+                .button
+                .setOnClickListener(v -> {
+                    Intent intent = new Intent(requireActivity(), ProfileActivity.class);
+                    startActivity(intent);
+                });
 
         setupRecycler();
     }
@@ -77,6 +88,11 @@ public class MainAccountFragment extends Fragment {
     }
 
     private void callback_navigation(ModelNavigation navigation) {
+
+        if (navigation.getTag().equals("vendor")) {
+            Intent intent = new Intent(requireActivity(), VendorActivity.class);
+            startActivity(intent);
+        }
 
     }
 }
