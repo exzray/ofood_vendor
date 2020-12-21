@@ -96,7 +96,7 @@ public class MainViewModel extends ViewModel {
         if (registration_table_occupy == null)
             registration_table_occupy = Firebase
                     .getCollectionListTable()
-                    .whereEqualTo("user_uid", "")
+                    .whereNotEqualTo("user_uid", "")
                     .addSnapshotListener((value, error) -> {
                         if (error != null) Log.i(TAG, error.getMessage());
 

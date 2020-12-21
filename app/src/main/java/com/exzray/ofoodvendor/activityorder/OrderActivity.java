@@ -16,6 +16,7 @@ import com.exzray.ofoodvendor.utility.Firebase;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.SetOptions;
 
 import java.util.Locale;
 
@@ -114,14 +115,28 @@ public class OrderActivity extends AppCompatActivity {
                     }
                 });
 
+//        table_ref
+//                .get()
+//                .addOnSuccessListener(snapshot -> {
+//                    ModelTable table = Convert.snapshotToTable(snapshot);
+//                    table.setUser_uid("");
+//
+//                    table_ref.
+//
+//                });
+
         Firebase
                 .getFirebaseFirestore()
                 .runTransaction(transaction -> {
 
-                    ModelTable table = Convert.snapshotToTable(transaction.get(table_ref));
+                    DocumentSnapshot snapshot = transaction.get(table_ref);
+
+                    if (!snapshot.exists()) return null;
+
+                    ModelTable table = Convert.snapshotToTable(snapshot);
                     table.setUser_uid("");
 
-                    transaction.set(table_ref, table);
+                    transaction.set(table_ref, table, SetOptions.merge());
 
                     return null;
                 });
@@ -130,10 +145,14 @@ public class OrderActivity extends AppCompatActivity {
                 .getFirebaseFirestore()
                 .runTransaction(transaction -> {
 
-                    ModelProfile profile = Convert.snapshotToProfile(transaction.get(table_ref));
+                    DocumentSnapshot snapshot = transaction.get(profile_ref);
+
+                    if (!snapshot.exists()) return null;
+
+                    ModelProfile profile = Convert.snapshotToProfile(snapshot);
                     profile.setSitting("");
 
-                    transaction.set(profile_ref, profile);
+                    transaction.set(profile_ref, profile, SetOptions.merge());
 
                     return null;
                 });
