@@ -24,6 +24,8 @@ public class OrderViewModel extends ViewModel {
     private final MediatorLiveData<List<DocumentSnapshot>> order_list_snapshot = new MediatorLiveData<>();
     private final MediatorLiveData<Boolean> serving_complete = new MediatorLiveData<>();
 
+    private final MutableLiveData<Double> total_double = new MutableLiveData<>();
+
     private ListenerRegistration registration_table_snapshot;
     private ListenerRegistration registration_order_list_snapshot;
 
@@ -45,6 +47,8 @@ public class OrderViewModel extends ViewModel {
             return;
         }
 
+        double total = 0.0;
+
         for (DocumentSnapshot snapshot : snapshots) {
             ModelOrder order = Convert.snapshotToOrder(snapshot);
 
@@ -53,10 +57,11 @@ public class OrderViewModel extends ViewModel {
                 serving_complete.setValue(false);
 
                 return;
-            }
+            } else total += order.getPrice() * ((double) order.getQuantity());
         }
 
         serving_complete.setValue(true);
+        total_double.setValue(total);
     }
 
     @Override
@@ -95,6 +100,10 @@ public class OrderViewModel extends ViewModel {
 
     public LiveData<Boolean> getServingComplete() {
         return serving_complete;
+    }
+
+    public LiveData<Double> getTotal(){
+        return total_double;
     }
 
     private void updateOrderListSnapshot(DocumentSnapshot snapshot) {

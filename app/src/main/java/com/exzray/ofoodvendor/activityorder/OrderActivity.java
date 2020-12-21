@@ -17,6 +17,8 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 
+import java.util.Locale;
+
 public class OrderActivity extends AppCompatActivity {
 
     private ActivityOrderBinding binding;
@@ -71,6 +73,14 @@ public class OrderActivity extends AppCompatActivity {
                 .getServingComplete()
                 .observe(this, complete -> binding.button.setEnabled(complete));
 
+        view_model
+                .getTotal()
+                .observe(this, price -> {
+
+                    String str = String.format(Locale.getDefault(), "PAY(%.2f)", price);
+                    binding.button.setText(str);
+                });
+
         binding
                 .button
                 .setOnClickListener(v -> pay());
@@ -91,6 +101,18 @@ public class OrderActivity extends AppCompatActivity {
 
         DocumentReference table_ref = table_snapshot.getReference();
         DocumentReference profile_ref = Firebase.getDocumentProfile(table.getUser_uid());
+
+        table_ref
+                .collection("list_order")
+                .get()
+                .addOnSuccessListener(query -> {
+
+                    if (query == null) return;
+
+                    for (DocumentSnapshot snapshot : query.getDocuments()) {
+                        snapshot.getReference().delete();
+                    }
+                });
 
         Firebase
                 .getFirebaseFirestore()

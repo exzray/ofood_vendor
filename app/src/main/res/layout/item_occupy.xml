@@ -32,35 +32,12 @@
         android:paddingHorizontal="20dp"
         android:paddingVertical="10dp">
 
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/image"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            tools:src="@tools:sample/avatars" />
-
-        <LinearLayout
+        <TextView
+            style="@style/TextAppearance.App.Subtitle2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_marginStart="10dp"
-            android:layout_toEndOf="@id/image"
-            android:orientation="vertical">
-
-            <TextView
-                style="@style/TextAppearance.App.Subtitle1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@{profile.name}"
-                tools:text="Mohd Nazirul Aiman Bin Rosli" />
-
-            <TextView
-                style="@style/TextAppearance.App.Subtitle2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@{Helper.getStringTableNo(table.index)}"
-                tools:text="Table No. 1" />
-
-        </LinearLayout>
+            android:text="@{Helper.getStringTableNo(table.index)}"
+            tools:text="Table No. 1" />
 
     </RelativeLayout>
 

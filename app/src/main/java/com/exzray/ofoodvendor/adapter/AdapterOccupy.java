@@ -30,6 +30,7 @@ public class AdapterOccupy extends RecyclerView.Adapter<AdapterOccupy.VH> {
 
 
     public AdapterOccupy(CallbackSnapshot callback) {
+
         this.callback = callback;
     }
 
@@ -49,6 +50,7 @@ public class AdapterOccupy extends RecyclerView.Adapter<AdapterOccupy.VH> {
 
     @Override
     public int getItemCount() {
+
         return list.size();
     }
 
@@ -77,28 +79,6 @@ public class AdapterOccupy extends RecyclerView.Adapter<AdapterOccupy.VH> {
             binding.setCallback(callback);
             binding.setSnapshot(data);
             binding.setTable(table);
-
-            Firebase
-                    .getDocumentProfile(table.getUser_uid())
-                    .get()
-                    .addOnSuccessListener(snapshot -> {
-
-                        final ModelProfile profile = Convert.snapshotToProfile(snapshot);
-
-                        binding.setProfile(profile);
-
-                        if (profile.getImage_photo().isEmpty()) return;
-
-                        Firebase
-                                .getFirebaseStorage()
-                                .getReference()
-                                .child(profile.getImage_photo())
-                                .getDownloadUrl()
-                                .addOnSuccessListener(uri -> Glide
-                                        .with(binding.getRoot())
-                                        .load(uri)
-                                        .into(binding.image));
-                    });
         }
     }
 }
