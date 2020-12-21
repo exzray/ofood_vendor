@@ -38,6 +38,7 @@ public class ProductViewModel extends ViewModel {
         if (registration_product == null)
             registration_product = Firebase
                     .getCollectionListProduct()
+                    .orderBy("category_uid")
                     .addSnapshotListener((value, error) -> {
                         if (error != null) Log.i(TAG, error.getMessage());
 
