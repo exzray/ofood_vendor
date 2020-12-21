@@ -132,6 +132,7 @@ public class ProfileActivity extends AppCompatActivity {
                     final ModelProfile profile = Convert.snapshotToProfile(snapshot);
 
                     binding.editName.setText(profile.getName());
+                    Toast.makeText(this, profile.getName(), Toast.LENGTH_SHORT).show();
 
                     Firebase
                             .getStorageProfile()

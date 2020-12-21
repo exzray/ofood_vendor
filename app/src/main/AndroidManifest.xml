@@ -14,7 +14,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.OFoodVendor">
-        <activity android:name=".activityprofile.ProfileActivity"></activity>
+        <activity
+            android:name=".activityprofile.ProfileActivity"
+            android:label="Update Profile" />
         <activity android:name=".activityvendor.VendorActivity" />
 
         <meta-data
