@@ -10,6 +10,7 @@ public class ModelProfile {
 
     private String name = "";
     private String address = "";
+    private String sitting = "";
     private String image_photo = "";
 
     private Date joined = new Date();
@@ -38,6 +39,14 @@ public class ModelProfile {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getSitting() {
+        return sitting;
+    }
+
+    public void setSitting(String sitting) {
+        this.sitting = sitting;
     }
 
     public String getImage_photo() {

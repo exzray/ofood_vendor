@@ -51,12 +51,20 @@ public class Helper {
         return "member since " + DateFormat.getDateInstance(DateFormat.MEDIUM).format(date);
     }
 
+    public static String getStringPrice(Double price) {
+        return String.format(Locale.getDefault(), "RM %.2f", price);
+    }
+
     public static String getStringTableIndex(int index) {
         return String.format(Locale.getDefault(), "Table No. %d", index);
     }
 
     public static String getStringTableSize(int size) {
         return String.format(Locale.getDefault(), "table size %d", size);
+    }
+
+    public static String getStringTableNo(int no) {
+        return String.format(Locale.getDefault(), "Table No. %d", no);
     }
 
     public static String getString(String s) {

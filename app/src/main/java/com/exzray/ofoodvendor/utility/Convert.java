@@ -1,6 +1,7 @@
 package com.exzray.ofoodvendor.utility;
 
 import com.exzray.ofoodvendor.model.ModelCategory;
+import com.exzray.ofoodvendor.model.ModelOrder;
 import com.exzray.ofoodvendor.model.ModelProduct;
 import com.exzray.ofoodvendor.model.ModelProfile;
 import com.exzray.ofoodvendor.model.ModelTable;
@@ -27,6 +28,10 @@ public class Convert {
 
     public static ModelTable snapshotToTable(DocumentSnapshot snapshot) {
         return snapshot.toObject(ModelTable.class);
+    }
+
+    public static ModelOrder snapshotToOrder(DocumentSnapshot snapshot) {
+        return snapshot.toObject(ModelOrder.class);
     }
 
 }
