@@ -34,10 +34,6 @@ public class Helper {
         return NavHostFragment.findNavController(fragment);
     }
 
-    public static Boolean isStringEmpty(String s) {
-        return s == null || s.isEmpty();
-    }
-
     public static GoogleSignInClient getGoogleSignInClient(Context context) {
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(context.getString(R.string.default_web_client_id))
@@ -45,6 +41,10 @@ public class Helper {
                 .build();
 
         return GoogleSignIn.getClient(context, gso);
+    }
+
+    public static Boolean isStringEmpty(String s) {
+        return s == null || s.isEmpty();
     }
 
     public static String getStringJoined(Date date) {

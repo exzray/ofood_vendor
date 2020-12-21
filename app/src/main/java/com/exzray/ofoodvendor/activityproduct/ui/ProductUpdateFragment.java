@@ -113,6 +113,8 @@ public class ProductUpdateFragment extends Fragment {
                                         product.setImage_photo(path);
                                         product.setUpdated(new Date());
 
+                                        transaction.set(ref, product);
+
                                         return null;
                                     });
 
@@ -160,15 +162,6 @@ public class ProductUpdateFragment extends Fragment {
                     binding.swEnable.setChecked(product.getEnable());
 
                     Firebase
-                            .getStorageVendor()
-                            .child("product/" + snapshot.getId())
-                            .getDownloadUrl()
-                            .addOnSuccessListener(uri -> Glide
-                                    .with(binding.getRoot())
-                                    .load(uri)
-                                    .into(binding.imagePhoto));
-
-                    Firebase
                             .getDocumentCategory(product.getCategory_uid())
                             .get()
                             .addOnSuccessListener(snapshot_category -> {
@@ -178,6 +171,18 @@ public class ProductUpdateFragment extends Fragment {
 
                     view_model_fragment.setStringCategory(product.getCategory_uid());
                     view_model_fragment.setBooleanEnable(product.getEnable());
+
+                    if (product.getImage_photo() == null || product.getImage_photo().isEmpty()) return;
+
+                    Firebase
+                            .getFirebaseStorage()
+                            .getReference()
+                            .child(product.getImage_photo())
+                            .getDownloadUrl()
+                            .addOnSuccessListener(uri -> Glide
+                                    .with(binding.getRoot())
+                                    .load(uri)
+                                    .into(binding.imagePhoto));
 
                 });
 

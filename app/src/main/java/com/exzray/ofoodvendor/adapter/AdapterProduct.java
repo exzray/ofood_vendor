@@ -81,18 +81,21 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.VH> {
             binding.setProduct(product);
 
             Firebase
-                    .getStorageVendor()
-                    .child("product/" + doc.getId())
+                    .getDocumentCategory(product.getCategory_uid())
+                    .get()
+                    .addOnSuccessListener(snapshot -> binding.setCategory(Convert.snapshotToCategory(snapshot)));
+
+            if (product.getImage_photo() == null || product.getImage_photo().isEmpty()) return;
+
+            Firebase
+                    .getFirebaseStorage()
+                    .getReference()
+                    .child(product.getImage_photo())
                     .getDownloadUrl()
                     .addOnSuccessListener(uri -> Glide
                             .with(binding.getRoot())
                             .load(uri)
                             .into(binding.image));
-
-            Firebase
-                    .getDocumentCategory(product.getCategory_uid())
-                    .get()
-                    .addOnSuccessListener(snapshot -> binding.setCategory(Convert.snapshotToCategory(snapshot)));
 
         }
     }
